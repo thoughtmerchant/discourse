@@ -2,10 +2,11 @@
 
 <div class='list-controls'>
   <div class="container">
+    {{outlet navigation-bar}}
 
     {{bread-crumbs category=category categories=categories noSubcategories=noSubcategories}}
 
-    <ul class="nav nav-pills" id='category-filter'>
+    <ul class="nav nav-pills" id='navigation-bar'>
       {{each availableNavItems itemViewClass="Discourse.NavItemView"}}
     </ul>
 

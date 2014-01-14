@@ -18,55 +18,67 @@ Discourse.Route.buildRoutes(function() {
     router.route(page, { path: '/' + page });
   });
 
-  this.resource("list", { path: "/" }, function() {
+  this.resource('discovery', { path: '/' }, function() {
+
     router = this;
-
-    // categories
-    this.route('categories');
-
-    // top
-    this.route('top');
-    this.route('topCategory', { path: '/category/:slug/l/top' });
-    this.route('topCategoryNone', { path: '/category/:slug/none/l/top' });
-    this.route('topCategory', { path: '/category/:parentSlug/:slug/l/top' });
-
-    // top by periods
-    _.each(Discourse.TopList.PERIODS, function(period) {
-      var top = 'top' + period.capitalize();
-      router.route(top, { path: '/top/' + period });
-      router.route(top, { path: '/top/' + period + '/more' });
-      router.route(top + 'Category', { path: '/category/:slug/l/top/' + period });
-      router.route(top + 'Category', { path: '/category/:slug/l/top/' + period + '/more' });
-      router.route(top + 'CategoryNone', { path: '/category/:slug/none/l/top/' + period });
-      router.route(top + 'CategoryNone', { path: '/category/:slug/none/l/top/' + period + '/more' });
-      router.route(top + 'Category', { path: '/category/:parentSlug/:slug/l/top/' + period });
-      router.route(top + 'Category', { path: '/category/:parentSlug/:slug/l/top/' + period + '/more' });
-    });
-
-    // filters
     _.each(Discourse.ListController.FILTERS, function(filter) {
       router.route(filter, { path: '/' + filter });
       router.route(filter, { path: '/' + filter + '/more' });
-      router.route(filter + 'Category', { path: '/category/:slug/l/' + filter });
-      router.route(filter + 'Category', { path: '/category/:slug/l/' + filter + '/more' });
-      router.route(filter + 'CategoryNone', { path: '/category/:slug/none/l/' + filter });
-      router.route(filter + 'CategoryNone', { path: '/category/:slug/none/l/' + filter + '/more' });
-      router.route(filter + 'Category', { path: '/category/:parentSlug/:slug/l/' + filter });
-      router.route(filter + 'Category', { path: '/category/:parentSlug/:slug/l/' + filter + '/more' });
     });
 
-    // default filter for a category
-    this.route('category', { path: '/category/:slug' });
-    this.route('category', { path: '/category/:slug/more' });
-    this.route('categoryNone', { path: '/category/:slug/none' });
-    this.route('categoryNone', { path: '/category/:slug/none/more' });
-    this.route('category', { path: '/category/:parentSlug/:slug' });
-    this.route('category', { path: '/category/:parentSlug/:slug/more' });
+    this.route('categories');
 
     // homepage
     var homepage = Discourse.User.current() ? Discourse.User.currentProp('homepage') : Discourse.Utilities.defaultHomepage();
     this.route(homepage, { path: '/' });
   });
+
+//  this.resource("list", { path: "/" }, function() {
+//    router = this;
+//
+//    // categories
+//    this.route('categories');
+//
+//    // top
+//    this.route('top');
+//    this.route('topCategory', { path: '/category/:slug/l/top' });
+//    this.route('topCategoryNone', { path: '/category/:slug/none/l/top' });
+//    this.route('topCategory', { path: '/category/:parentSlug/:slug/l/top' });
+//
+//    // top by periods
+//    _.each(Discourse.TopList.PERIODS, function(period) {
+//      var top = 'top' + period.capitalize();
+//      router.route(top, { path: '/top/' + period });
+//      router.route(top, { path: '/top/' + period + '/more' });
+//      router.route(top + 'Category', { path: '/category/:slug/l/top/' + period });
+//      router.route(top + 'Category', { path: '/category/:slug/l/top/' + period + '/more' });
+//      router.route(top + 'CategoryNone', { path: '/category/:slug/none/l/top/' + period });
+//      router.route(top + 'CategoryNone', { path: '/category/:slug/none/l/top/' + period + '/more' });
+//      router.route(top + 'Category', { path: '/category/:parentSlug/:slug/l/top/' + period });
+//      router.route(top + 'Category', { path: '/category/:parentSlug/:slug/l/top/' + period + '/more' });
+//    });
+//
+//    // filters
+//    _.each(Discourse.ListController.FILTERS, function(filter) {
+//      router.route(filter, { path: '/' + filter });
+//      router.route(filter, { path: '/' + filter + '/more' });
+//      router.route(filter + 'Category', { path: '/category/:slug/l/' + filter });
+//      router.route(filter + 'Category', { path: '/category/:slug/l/' + filter + '/more' });
+//      router.route(filter + 'CategoryNone', { path: '/category/:slug/none/l/' + filter });
+//      router.route(filter + 'CategoryNone', { path: '/category/:slug/none/l/' + filter + '/more' });
+//      router.route(filter + 'Category', { path: '/category/:parentSlug/:slug/l/' + filter });
+//      router.route(filter + 'Category', { path: '/category/:parentSlug/:slug/l/' + filter + '/more' });
+//    });
+//
+//    // default filter for a category
+//    this.route('category', { path: '/category/:slug' });
+//    this.route('category', { path: '/category/:slug/more' });
+//    this.route('categoryNone', { path: '/category/:slug/none' });
+//    this.route('categoryNone', { path: '/category/:slug/none/more' });
+//    this.route('category', { path: '/category/:parentSlug/:slug' });
+//    this.route('category', { path: '/category/:parentSlug/:slug/more' });
+//
+  //});
 
   // User routes
   this.resource('user', { path: '/users/:username' }, function() {

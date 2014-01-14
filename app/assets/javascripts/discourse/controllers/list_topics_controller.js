@@ -8,7 +8,6 @@
 **/
 Discourse.ListTopicsController = Discourse.ObjectController.extend({
   needs: ['list', 'composer', 'modal'],
-  rankDetailsVisible: false,
 
   // If we're changing our channel
   previousChannel: null,
@@ -44,10 +43,6 @@ Discourse.ListTopicsController = Discourse.ObjectController.extend({
     // clear a pinned topic
     clearPin: function(topic) {
       topic.clearPin();
-    },
-
-    toggleRankDetails: function() {
-      this.toggleProperty('rankDetailsVisible');
     },
 
     createTopic: function() {
