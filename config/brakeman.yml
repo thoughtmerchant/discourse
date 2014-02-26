@@ -1,0 +1,4 @@
+---
+:skip_checks:
+- CheckBasicAuth
+:output_format: :to_json
